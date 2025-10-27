@@ -1,0 +1,280 @@
+/* --- Global Styles & Variables --- */
+:root {
+    --bg-primary: #000000;     /* Pure Black */
+    --bg-secondary: #1a1a1a;   /* Slightly lighter black for cards/sections */
+    --bg-sidebar: #0a0a0a;     /* Sidebar background, slightly darker */
+    --border-color: #333333;   /* Grey border for clean look */
+    
+    /* New vibrant accent colors */
+    --accent-blue: #00bfff;    /* Deep Sky Blue */
+    --accent-green: #00ff7f;   /* Spring Green */
+    --accent-orange: #ffa500;  /* Orange */
+    --accent-red: #ff4500;     /* Orange Red for negative indicators */
+
+    --text-primary: #f0f0f0;   /* Off-white */
+    --text-secondary: #aaaaaa; /* Muted grey for descriptions */
+    
+    --font-family: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    display: flex;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- Main Layout --- */
+.dashboard-container {
+    display: flex;
+    width: 100%;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 250px;
+    background-color: var(--bg-sidebar);
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--border-color); /* Thinner, subtle border */
+    flex-shrink: 0;
+}
+
+.sidebar-logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    letter-spacing: 1px;
+}
+
+.logo-accent {
+    color: var(--accent-blue); /* Logo accent is blue */
+    text-shadow: 0 0 5px rgba(0, 191, 255, 0.5); /* Subtle glow */
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav .nav-item {
+    margin-bottom: 1rem;
+}
+
+.sidebar-nav .nav-item a {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px; /* Slightly less rounded */
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.sidebar-nav .nav-item a:hover {
+    background-color: var(--bg-secondary); /* Darker hover */
+    color: var(--text-primary);
+}
+
+.sidebar-nav .nav-item.active a {
+    background-color: var(--accent-blue); /* Active uses primary accent */
+    color: var(--bg-primary); /* Dark text on bright accent */
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+}
+
+/* --- Main Content Area --- */
+.main-content {
+    flex-grow: 1;
+    padding: 2rem 3rem;
+    overflow-y: auto;
+}
+
+.main-header {
+    margin-bottom: 2rem;
+}
+
+.main-header h1 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.main-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+/* --- Stat Card Grid --- */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.stat-card {
+    background-color: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.card-icon {
+    font-size: 1.5rem;
+    margin-right: 0.75rem;
+    color: var(--accent-blue); /* Default icon color */
+}
+/* Specific icon colors */
+.stat-card.cpu .card-icon { color: var(--accent-blue); }
+.stat-card.memory .card-icon { color: var(--accent-green); }
+.stat-card.network .card-icon { color: var(--accent-orange); }
+.stat-card.storage .card-icon { color: var(--accent-red); } /* Using a fourth accent */
+
+.card-header h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.card-body h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--text-primary);
+}
+
+.change-indicator {
+    font-size: 1rem;
+    font-weight: 500;
+}
+.change-indicator.positive {
+    color: var(--accent-green);
+}
+.change-indicator.negative {
+    color: var(--accent-red); /* Stronger red for negative */
+}
+
+/* --- Chart Area --- */
+.chart-container {
+    background-color: var(--bg-secondary);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.chart-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.legend-item {
+    font-weight: 500;
+    position: relative;
+    padding-left: 20px;
+    color: var(--text-secondary);
+}
+/* Color dots for legend */
+.legend-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+.legend-item.cpu-chart::before { background-color: var(--accent-blue); }
+.legend-item.memory-chart::before { background-color: var(--accent-green); }
+.legend-item.network-chart::before { background-color: var(--accent-orange); }
+
+.chart-area {
+    height: 350px; /* Fixed height for the chart */
+    width: 100%;
+    position: relative; /* Needed for Chart.js responsiveness */
+}
+
+/* --- Responsive (Simple) --- */
+@media (max-width: 1200px) {
+    .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .sidebar-nav ul {
+        display: flex; /* Make sidebar nav horizontal on small screens */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    .sidebar-nav .nav-item {
+        margin-bottom: 0;
+    }
+    .sidebar-nav .nav-item a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    .main-content {
+        padding: 1.5rem;
+    }
+    .stat-grid {
+        grid-template-columns: 1fr;
+    }
+    .main-header h1 {
+        font-size: 1.8rem;
+    }
+    .main-header p {
+        font-size: 0.9rem;
+    }
+    .card-body h2 {
+        font-size: 2rem;
+    }
+    .chart-area {
+        height: 250px; /* Smaller chart on mobile */
+    }
+}

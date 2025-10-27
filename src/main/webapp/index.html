@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Monitor Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                SYS<span class="logo-accent">MONITOR</span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active"><a href="#">Dashboard</a></li>
+                    <li class="nav-item"><a href="#">Performance</a></li>
+                    <li class="nav-item"><a href="#">Processes</a></li>
+                    <li class="nav-item"><a href="#">Analytics</a></li>
+                    <li class="nav-item"><a href="#">Settings</a></li>
+                    <li class="nav-item"><a href="#">Logs</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>System Performance Monitor</h1>
+                <p>Real-time system monitoring with advanced analytics</p>
+            </header>
+
+            <section class="stat-grid">
+                <div class="stat-card cpu">
+                    <div class="card-header">
+                        <span class="card-icon">💻</span>
+                        <h3>CPU Usage</h3>
+                    </div>
+                    <div class="card-body">
+                        <h2 id="cpu-percent">0%</h2>
+                        <span id="cpu-change" class="change-indicator positive">+0.0%</span>
+                    </div>
+                </div>
+
+                <div class="stat-card memory">
+                    <div class="card-header">
+                        <span class="card-icon">🧠</span>
+                        <h3>Memory</h3>
+                    </div>
+                    <div class="card-body">
+                        <h2 id="mem-usage">0.00GB</h2>
+                        <span id="mem-change" class="change-indicator negative">-0.0GB</span>
+                    </div>
+                </div>
+
+                <div class="stat-card network">
+                    <div class="card-header">
+                        <span class="card-icon">🌐</span>
+                        <h3>Network</h3>
+                    </div>
+                    <div class="card-body">
+                        <h2 id="net-speed">0MB/s</h2>
+                        <span id="net-change" class="change-indicator positive">+0MB/s</span>
+                    </div>
+                </div>
+
+                <div class="stat-card storage">
+                    <div class="card-header">
+                        <span class="card-icon">💽</span>
+                        <h3>Storage</h3>
+                    </div>
+                    <div class="card-body">
+                        <h2 id="storage-percent">0%</h2>
+                        <span id="storage-change" class="change-indicator positive">+0.0%</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="chart-container">
+                <h3>Real-time Performance Chart</h3>
+                <div class="chart-legend">
+                    <span class="legend-item cpu-chart">CPU Usage</span>
+                    <span class="legend-item memory-chart">Memory Usage</span>
+                    <span class="legend-item network-chart">Network Usage</span>
+                </div>
+                <div class="chart-area">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
