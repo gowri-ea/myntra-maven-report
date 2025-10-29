@@ -67,7 +67,7 @@ pipeline{
                 echo "Running new container ${CONTAINER_NAME} on port 8084..."
                 sh "sudo docker stop ${CONTAINER_NAME} || true"
                 sh "sudo docker rm ${CONTAINER_NAME} || true"
-                sh "sudo docker run -d -p 8084:8084 --name ${CONTAINER_NAME} ${IMAGE_NAME}:latest"
+                sh "sudo docker run -d -p 8084:8080 --name ${CONTAINER_NAME} ${IMAGE_NAME}:latest"
             }
         }
     }
