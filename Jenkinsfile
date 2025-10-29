@@ -27,7 +27,7 @@ pipeline{
         stage('Build Docker Image') {
             steps {
                 echo "Building Docker image: ${IMAGE_NAME}:${BUILD_NUMBER}"
-                sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ."
+                sh "sudo docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ."
             }
         }
 
@@ -35,7 +35,7 @@ pipeline{
             steps {
                 echo 'Logging in to Docker Hub...'
                 withCredentials([usernamePassword(credentialsId: env.DOCKERHUB_CREDENTIALS_ID, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    sh 'echo $DOCKER_PASS | sudo docker login -u $DOCKER_USER --password-stdin'
                 }
             }
         }
@@ -44,13 +44,13 @@ pipeline{
             steps {
                 script {
                     echo "Pushing image: ${IMAGE_NAME}:${BUILD_NUMBER}"
-                    sh "docker push ${IMAGE_NAME}:${BUILD_NUMBER}"
+                    sh "sudo docker push ${IMAGE_NAME}:${BUILD_NUMBER}"
                     
                     echo "Tagging as 'latest'..."
-                    sh "docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${IMAGE_NAME}:latest"
+                    sh "sudo docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${IMAGE_NAME}:latest"
                     
                     echo "Pushing 'latest' tag..."
-                    sh "docker push ${IMAGE_NAME}:latest"
+                    sh "sudo docker push ${IMAGE_NAME}:latest"
                 }
             }
         }
@@ -58,16 +58,16 @@ pipeline{
         stage('Remove Local Docker Image') {
             steps {
                 echo "Removing local image: ${IMAGE_NAME}:${BUILD_NUMBER}"
-                sh "docker rmi ${IMAGE_NAME}:${BUILD_NUMBER}"
+                sh "sudo docker rmi ${IMAGE_NAME}:${BUILD_NUMBER}"
             }
         }
 
         stage('Run Container') {
             steps {
                 echo "Running new container ${CONTAINER_NAME} on port 8084..."
-                sh "docker stop ${CONTAINER_NAME} || true"
-                sh "docker rm ${CONTAINER_NAME} || true"
-                sh "docker run -d -p 8084:8084 --name ${CONTAINER_NAME} ${IMAGE_NAME}:latest"
+                sh "sudo docker stop ${CONTAINER_NAME} || true"
+                sh "sudo docker rm ${CONTAINER_NAME} || true"
+                sh "sudo docker run -d -p 8084:8084 --name ${CONTAINER_NAME} ${IMAGE_NAME}:latest"
             }
         }
     }
